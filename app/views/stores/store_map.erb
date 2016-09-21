@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style type="text/css">
+      body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;}
+      #golist {display: none;}
+      @media (max-device-width: 780px){#golist{display: block !important;}}
+    </style>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="http://api.map.baidu.com/api?type=quick&ak=WBnYQcZ7SbL5R08YjWrey8vX&v=1.0"></script>
+    <title><%= @store.name %></title>
+  </head>
+  <body>
+    <div id="allmap"></div>
+  </body>
+</html>
+<script type="text/javascript">
+  // 百度地图API功能
+  var map = new BMap.Map("allmap");            // 创建Map实例
+  var point = new BMap.Point(<%= @store.position.split(",")[0] %>,<%= @store.position.split(",")[1] %>); // 创建点坐标
+  map.centerAndZoom(point,15);                 // 初始化地图,设置中心点坐标和地图级别。
+  map.addControl(new BMap.ZoomControl());      //添加地图缩放控件
+  var marker = new BMap.Marker(new BMap.Point(<%= @store.position.split(",")[0] %>,<%= @store.position.split(",")[1] %>));  //创建标注
+  map.addOverlay(marker);    // 将标注添加到地图中
+  var opts = {
+    width : 200,    // 信息窗口宽度
+    height: 60,     // 信息窗口高度
+    title : '<%=@store.name%>', // 信息窗口标题
+    enableAutoPan : true //自动平移
+  }
+  var infoWindow = new BMap.InfoWindow("地址：<%=@store.address%>", opts);  // 创建信息窗口对象
+  marker.addEventListener("click", function(){
+    map.openInfoWindow(infoWindow,point); //开启信息窗口
+  });
+</script>
+

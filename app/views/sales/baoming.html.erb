@@ -1,0 +1,16 @@
+<div class="login">
+  <div class="login_form">
+    <%= form_tag "/sales/#{@customer.id}", :remote => "true", :method => "put" do %>
+      <input type="hidden" value="<%=params[:open_id]%>" name="open_i" />
+      <h1>会员参与</h1>
+      <h2>关注久久久&nbsp;&nbsp;&nbsp;&nbsp;开车不用愁</h2>
+      <p><span>手机号：<%= @customer.mobilephone %></span></p>
+      <p><span>车牌号：<%= @car_num.num if @car_num %></span></p>
+      <p style="position: relative;">
+        <button onclick="old_customer_get_valid_code(this, <%= @customer.mobilephone %>, <%= @customer.id %>)" type="button" id="get_valid_code_button" style="width:114px;">获取验证码</button>
+        <input type="text" placeholder="输入验证码" style="width: 120px;" name="valid_code" id="valid_code"/>
+      </p>
+      <p><button class="login_btn" type="button" onclick="old_customer_valid(this)">参加</button></p>
+    <% end %>
+  </div>
+</div>

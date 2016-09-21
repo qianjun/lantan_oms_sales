@@ -1,0 +1,30 @@
+<div class="product_list">
+  <div class="product_list_body">
+    <div class="product_list_top"> <img src="/assets/product_list_img.png" /> </div>
+    <div class="product_li">
+      <ul class="prod_tit_li">
+        <li ><span class="<% if @id ==4 %> hover<%end%>">
+            <a href ="/stores/<%=params[:store_id]%>/items/4?openid=<%= params[:openid] %>">新品HOT</a></span></li>
+        <li><span class="<% if @id ==1 %> hover<%end%>">
+            <a href ="/stores/<%=params[:store_id]%>/items/1?openid=<%= params[:openid] %>">产品</a></span></li>
+        <li><span class="<% if @id ==2 %> hover<%end%>">
+            <a href ="/stores/<%=params[:store_id]%>/items/2?openid=<%= params[:openid] %>">服务</a></span></li>
+        <li><span class="<% if @id ==3 %> hover<%end%>">
+            <a href ="/stores/<%=params[:store_id]%>/items/3?openid=<%= params[:openid] %>">卡类</a></span></li>
+      </ul>
+    </div>
+    <div class="product_list_info">
+      <% @prods.flatten.each do |prod| %>
+        <div class="product_list_one_info">
+          <a  href="/stores/<%= @store %>/items/<%= prod.id %>/prod_detail?types=<%= prod.types %>&openid=<%= params[:openid] %>" >
+            <div class="product_list_left">
+              <h3><%= prod.name %></h3>
+              <p><%= prod.description.nil? ?  "" : truncate_u(prod.description,28) %></p>
+            </div>
+            <div class="product_list_right"> <img  src="<%= prod.img_url ? prod.img_url.gsub("img#{prod.id}","img#{prod.id}_#{Constant::P_PICSIZE[1]}") : "/assets/default.png" %>" /> </div>
+          </a>
+        </div>
+      <%end unless @prods.flatten.blank?%>
+    </div>
+  </div>
+</div>

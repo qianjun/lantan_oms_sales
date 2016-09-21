@@ -1,0 +1,9 @@
+#cricle{width:200px;height:200px;position:relative;background:#333;overflow:hidden}
+#cricle .left,#cricle .right,#cricle .text{width:200px;height:200px}
+#cricle .text{position:absolute;top:0;left:0;z-index:41;color:#fff;font:26px/200px 'arial';text-align:center}
+#cricle .mask{z-index:40}
+#cricle .mask,#cricle .bg{width:100px;height:200px;background:#333;position:absolute;top:0}
+#cricle .bg{background:url(/assets/bg_green.png) no-repeat 0 0}
+#cricle .mask,#cricle .left .bg{left:0}
+#cricle .right{display:none}
+#cricle .right .bg{background-position:right top;right:0}

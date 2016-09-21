@@ -1,0 +1,51 @@
+<div class="car_owner">
+  <div class="shopping">
+    <span class="shopping_car">我的购物车</span>
+    <div class="shopping_tp">
+      <a  id="select_all" onclick="select_all_prod(true)">全选</a>
+      <a  id="select_none" style="display: none" onclick="select_all_prod(false)">全不选</a>
+      <a onclick="del_prod(<%= params[:store_id] %>,<%= params[:openid] %>)">删除</a>
+    </div>
+  </div>
+  <div class="shopping_product" >
+    <table cellpadding="0" cellspacing="0" class="shopping_one_prduct">
+      <% total_price = 0 %>
+      <%@carts.each do |k,v| %>
+        <%v.each do |item|%>
+          <%   num = @cart_num["#{k}_#{item.id}"]
+          price = item.attributes["price"] || item.attributes["sale_price"]
+          if num
+            total_price += num*price
+          %>
+            <tr id="<%=k%>_<%= item.id %>">
+              <td width="5%"><input type="checkbox"  onclick="select_prod(this)" id="<%=  %>" /></td>
+              <td width="15%"><a><img src="<%= item.img_url.gsub(".","_50.") %>" /></a></td>
+              <td width="25%" ><a href="#"><%= item.name %></a></td>
+              <td width="30%"  class="sign">
+                <span onclick="operate_one('minute','#num_<%=k%>_<%= item.id %>','cal')">-</span>
+                <span id="num_<%=k%>_<%= item.id %>"><%= num %></span>
+                <span onclick="operate_one('add','#num_<%=k%>_<%= item.id %>','cal')">+</span></td>
+              <td width="12%" id="price" >
+                <span id="price_<%=k%>_<%= item.id %>"><%= price  %></span>
+              </td>
+              <td width="13%" >
+                <span  id="total_<%=k%>_<%= item.id %>"><%= num*price %></span>
+              </td>
+            </tr>
+          <%end%>
+        <%end%>
+      <%end%>
+    </table>
+  </div>
+  <div class="product_all_total">
+    <p> 合计:￥<span  class="money" id="money"><%= 0 %> </span>元
+      <span>
+        <select id="car_num">
+          <%@car_nums.each do |car_num|%>
+            <option value="<%= car_num.id %>"><%= car_num.num %></option>
+          <%end%>
+        </select>
+      </span>
+      <a href="javascript:void(0)" onclick="submit_select(<%= params[:store_id] %>,<%= params[:openid] %>)">递交订单</a></p>
+  </div>
+</div>

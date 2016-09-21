@@ -1,0 +1,25 @@
+<div class="case">
+  <div class="case_body">
+    <div class="case_top"><%= @types[params[:types]]%></div>
+    <div class="case_con_body">
+      <ul>
+        <% unless @knows.blank? %>
+          <% @knows.each do |know| %>
+            <li><div class="div_img"><img  src="/assets/30x30dp.png" class="img_li" /></div>
+              <div class="div_title"><a href="/stores/<%= know.id %>/single_know"><%= know.title  %></a></div></li>
+            <br/>
+          <%end%>
+        <%else%>
+          <%@types.delete(params[:types])
+          @types.each do |k,v|%>
+            <li>
+              <div class="div_img"><img  src="/assets/30x30dp.png" class="img_li" /></div>
+              <div class="div_title"><a href="/stores/<%=params[:id] %>/knowledge_show?types=<%= k  %>"><%= v  %></a></div>
+            </li>
+            <br/>
+          <%end%>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</div>

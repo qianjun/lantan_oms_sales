@@ -1,0 +1,29 @@
+<div class="vip_ope">
+  <div class="vip_main">
+    <h1>会员绑定操作</h1>
+    <p>请输入您在门店登记的手机号码和车牌号码最后绑定</p>
+  </div>
+  <%= form_for :customer,:html=>{:id=>"bind_user"},:url=>"/stores/#{params[:id]}/customers",:method=>:post do %>
+    <input type="hidden" value="<%= params[:openid] %>" name="openid" />
+    <div class="vip_body">
+      <p><div class="input_item">
+        <label>车牌号</label>
+        <input type="text" id="car_num" name="car_num" />
+      </div></p>
+      <p><div class="input_item">
+        <label>手机号</label><input type="text" id="phone" name="phone"/>
+      </div></p>
+      <div class="vip_bd">
+        <input type="button" value="绑定" onclick="check_bind()" />
+      </div>
+    </div>
+  <%end%>
+  <div class="foot_img">
+    <div class="foot_info">
+      <h2><%= @store.name %></h2>
+      <h3>地址：<%= @store.address %></h3>
+      <h4>电话：<%= @store.phone %></h4>
+    </div>
+  </div>
+</div>
+

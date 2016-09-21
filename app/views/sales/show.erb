@@ -1,0 +1,16 @@
+<div class="rightAera">
+  <div class="salesDetail">
+    <h1><%= @sale.name %></h1>
+    <span>发布时间：<%= @sale.created_at.nil? ? "" :  @sale.created_at.strftime("%Y.%m.%d") %></span>
+    <img src="<%= @sale.img_url.nil? ? "" : @sale.img_url.gsub("img#{@sale.id}","img#{@sale.id}_#{Constant::SALE_PICSIZE[2]}")  %>" />
+    <h2>活动介绍:</h2>
+    <p><%= @sale.introduction.nil? ? "" : @sale.introduction.html_safe  %></p>
+    <% if @sale.disc_time_types == Sale::DISC_TIME[:TIME] %>
+      <h2>活动时间：</h2><p><%= "#{@sale.started_at.nil?? "截止日期为" : @sale.started_at.strftime("%Y.%m.%d")}-
+#{ @sale.ended_at.nil?? "暂未定" : @sale.ended_at.strftime("%Y.%m.%d")}" %></p>
+    <%else%>
+      <h2>活动规则：</h2>
+      <p><%= "#{Sale::DISC_TIME_NAME[@sale.disc_time_types]}#{@sale.everycar_times}次" %></p>
+    <%end%>
+  </div>
+</div>

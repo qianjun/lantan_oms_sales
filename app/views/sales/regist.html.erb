@@ -1,0 +1,16 @@
+<div class="login">
+  <div class="login_form">
+    <%= form_tag "/sales/", :remote => "true",:method=>:post do %>
+      <input type="hidden" id="open_id" name="open_id" value="<%= @open_id %>"/>
+      <h1>会员注册</h1>
+      <h2>关注久久久&nbsp;&nbsp;&nbsp;&nbsp;开车不用愁</h2>
+      <p><input type="text" placeholder="输入手机号" name="mobilephone" id="mobilephone"/></p>
+      <p><input type="text" placeholder="输入车牌号" name="num" id="num"/></p>
+      <p style="position: relative;">
+        <button onclick="get_valid_code(this)" type="button" id="get_valid_code_button" style="width:114px;">获取验证码</button>
+        <input type="text" placeholder="输入验证码" style="width: 120px;" name="valid_code" id="valid_code"/>
+      </p>
+      <p><button class="login_btn" onclick="reg_valid(this)" type="button">注册并参加</button></p>
+    <% end %>
+  </div>
+</div>

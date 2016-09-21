@@ -1,0 +1,28 @@
+<div class="car_owner">
+  <div class="car_owner_top" ><h1><%= (@customer && @customer.name) || "车主"%>,您好！</h1></div>
+  <div class="schedule_rate">
+    <p> 施工现场实况</p>
+  </div>
+  <table class="schedule_rate_body" cellpadding="0" cellspacing="0">
+    <%@stations.each do |station|%>
+      <tr >
+        <td width="35%" class="station"><%= station.name %></td>
+        <td width="15%" class="station"><span class="station_state  <%=@work_orders[station.id].nil? ?  "free" : "busy"%>"><%= @work_orders[station.id].nil? ?  "空" : "忙" %></span></td>
+        <td width="50%" class="state_num"><label>排队&nbsp;&nbsp;&nbsp;&nbsp;
+            <span><%= @station_lines[station.id] || 0 %></span>&nbsp;&nbsp;&nbsp;&nbsp;单</label>
+          <p>
+            <% (0..7).each do |k| %>
+              <% if k < (@station_lines[station.id] || 0) %>
+                <img src="/assets/color_person.png" />
+              <%else%>
+                <img src="/assets/no_color_person.png" />
+              <%end%>
+            <%end%>
+          </p>
+        </td>
+      </tr>
+    <%end%>
+  </table>
+  <div>
+  </div>
+</div>

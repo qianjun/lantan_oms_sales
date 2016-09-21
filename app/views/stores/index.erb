@@ -1,0 +1,18 @@
+<body>
+  <div class="head">
+    <h1 style="background: #18c0b4;">久久久门店信息</h1>
+  </div>
+  <div class="main">
+    <%@stores.each do |store|%>
+      <div class="store_box">
+        <img src="<%=  Constant::SERVER_PATH + store.img_url%>" width="120" />
+        <div class="store_info">
+          <h1><%=store.name%></h1>
+          <p>地址：<%=store.address%></p>
+          <p>经营项目：<%= @products[store.id] ?  truncate_u(@products[store.id].map(&:name).join("、"),35) : "--"  %></p>
+          <p style="text-align: right; padding-right: 20px;"><a href="/stores/<%= store.id %>">进入门店详情 ></a></p>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</body>

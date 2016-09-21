@@ -1,0 +1,4 @@
+alert("<%= @msg %>");
+<% if @status == 1 %>
+  window.location.href='/?open_id=<%= params[:open_id] %>';
+<%end%>

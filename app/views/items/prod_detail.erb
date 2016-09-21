@@ -1,0 +1,61 @@
+<%= javascript_include_tag "jquery-shopping" %>
+<div class="product_details">
+  <div class="product_detail_top"> <img src="<%= @product.img_url  %>" /> </div>
+  <div  class=" product_dv_info">
+    <div class="recommend">荐</div>
+    <span class="product_dv_sp"><%=  @product.name%></span>
+    <div class="product_detail_item div_width_01">
+      <label>售价：￥</label>
+      <span class="pr_span" id="target_price"><%=  @product.sale_price  %></span> </div>
+    <div class="product_detail_item  div_width_02">
+      <label>已售：</label>
+      <span class="pr_span2"><%= @saled_num %>件</span> </div>
+    <div class="product_detail_item  div_width_03">
+      <label>满意度：</label>
+      <p class="start_p" style="background: #ff9613;width: <%=(rand(20).to_i+80)*0.9%>px;" >
+        <span class="pr_start" ></span></p></div>
+  </div>
+  <div class="choise_num">
+    <p>选择数量</p>
+    <div class="num_change">
+      <span class="span_ch" onclick="operate_one('delete','#num')">-</span>
+      <span class="span_num" id="num">1</span>
+      <span  class="span_ch" onclick="operate_one('add','#num')">+</span>
+    </div>
+  </div>
+  <div class="product_detail_button">
+    <input type="hidden" id="target_types" value="<%= params[:types] %>" />
+    <input type="hidden" id="target_id" value="<%= @product.id %>" />
+
+    <div class="detail_button">
+      <button class="buy_button" onclick="add_cart(<%= params[:openid] %>,<%= params[:store_id] %>,'buy_action')">立即购买</button>
+    </div>
+    <div class="detail_button">
+      <button  class="ready_button" id="add_action"  onclick="add_cart(<%= params[:openid] %>,<%= params[:store_id] %>,'add_action')">加入购物车</button>
+    </div>
+  </div>
+  <div class="product_detail_info">
+    <h4>产品详情</h4>
+    <%@product.image_urls.each do |img|%>
+      <img src="<%=  img.img_url %>" width="80%" />
+    <% end if (params[:types].to_i == 0 || params[:types].to_i == 1) %>
+    <p><%= @product.description %></p>
+    <% if (params[:types].to_i == 0 || params[:types].to_i == 1) && !@product.introduction.nil? %>
+      <p><%= @product.introduction.html_safe %></p>
+    <%end%>
+  </div>
+  <div class="buy_car">
+    <a href="">
+      <img  src="/assets/shopping.png" />
+      <span class="buy_car_num"><%= @cat_num %></span>
+    </a>
+  </div>
+
+</div>
+<img src="<%=  "/assets/default.png" %>" width="0px" height="0px" id ="animate_img" />
+<script type="text/javascript">
+  $('#add_action').shoping();
+</script>
+<%#=@product.img_url ? @product.img_url.gsub("img#{@product.id}","img#{@product.id}_#{Constant::P_PICSIZE[0]}")%>
+
+

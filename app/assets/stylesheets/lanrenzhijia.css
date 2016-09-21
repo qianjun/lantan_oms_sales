@@ -1,0 +1,79 @@
+@charset "utf-8";
+/* lanrenzhijia.com */
+
+li {
+	list-style-type:none
+}
+.column1_left {
+	width:300px;
+	text-align:center;
+	border:1px solid #CCC;
+	padding:2px;
+	margin-top: 0;
+	margin-right: auto;
+	margin-bottom: 0;
+	margin-left: auto;
+}
+.container, .container * {
+	margin:0;
+	padding:0;
+}
+.container {
+	width:300px;
+	height:205px;
+	overflow:hidden;
+	position:relative;
+	text-align:center;
+}
+
+.slider li {
+	list-style:none;
+	display:inline;
+}
+.slider img {
+	width:625px;
+	height:205px;
+	display:block;
+	border:0;
+}
+.slider {
+}
+.slider2 {
+}
+.slider2 li {
+	float:left;
+}
+.numm{
+	width:300px;
+	height:20px;
+	position:absolute;
+	text-align:center;
+	left: 106px;
+	top: 215px;
+}
+.num {
+	position:absolute;
+	right:112px;
+	bottom:5px;
+	height:20px;
+	text-align:center;
+}
+.num li {
+	float: left;
+	width:21px;
+	height:20px;
+	background:url(../images/ink531hui.png) no-repeat center center;
+	_background:none;
+
+
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/ink531hui.png', sizingMethod='crop');
+	cursor: pointer;
+	overflow: hidden;
+}
+.num li.on {
+	background:url(../images/ink531hui1.png) no-repeat center center;
+	_background:none;
+_filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/ink531hui1.png', sizingMethod='crop');
+	width:21px;
+	height:20px;
+}

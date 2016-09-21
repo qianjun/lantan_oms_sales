@@ -1,0 +1,66 @@
+<div class="car_owner">
+  <div class="order_top">
+    <span>我的订单</span>
+    <div class="order_state">
+      <div><img src="/assets/order_01.png" /><p>已付款</p></div>
+      <div><img src="/assets/order_02.png" /><p>未付款</p></div>
+      <div><img src="/assets/order_04.png" /><p>意向/预约单</p></div>
+    </div>
+  </div>
+  <div class="order_detail" id="reserv" style="display: none">
+    <table cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="20%">车牌</td>
+        <td width="30%">项目</td>
+        <td width="10%">价格</td>
+        <td width="10%">数量</td>
+        <td width="20%">小计</td>
+        <td width="10%">类型</td>
+        <%@reservs.each do |reserv|%>
+        <tr>
+          <td width="20%"><%= @car_nums[reserv.car_num_id] %></td>
+          <td width="30%">澜泰真皮镀膜</td>
+          <td width="15%"><%= reserv.target_price %></td>
+          <td width="10%"><%= reserv.target_num %></td>
+          <td width="10%"><%= reserv.sum %></td>
+          <td width="20%">380.00</td>
+        </tr>
+      <%end%>
+      </tr>
+    </table>
+    <p class="amount">合计：<span>960.00</span></p>
+  </div>
+  <div class="order_detail">
+    <div class="order_detail_top">
+      <span>2014-9-10</span>
+      <span class="artifice">开单：王晓丽&nbsp;&nbsp; 技师：刘国龙&nbsp; 李敏</span>
+    </div>
+    <table cellpadding="0" cellspacing="0">
+      <tr>
+        <td width="20%">消费车辆</td>
+        <td width="30%">消费项目</td>
+        <td width="10%">单价</td>
+        <td width="10%">数量</td>
+        <td width="10%">优惠</td>
+        <td width="20%">小计</td>
+      </tr>
+      <tr>
+        <td width="20%">浙A16034</td>
+        <td width="30%">澜泰真皮镀膜</td>
+        <td width="15%">380.00</td>
+        <td width="10%">1</td>
+        <td width="10%">0</td>
+        <td width="20%">380.00</td>
+      </tr>
+      <tr>
+        <td width="20%">浙A16034</td>
+        <td width="30%">澜泰镀膜洗车液</td>
+        <td width="15%">580.00</td>
+        <td width="10%">1</td>
+        <td width="10%">0</td>
+        <td width="20%">580.00</td>
+      </tr>
+    </table>
+    <p class="amount">合计：<span>960.00</span></p>
+  </div>
+</div>

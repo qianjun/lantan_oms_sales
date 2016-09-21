@@ -1,0 +1,25 @@
+<div class="schedule">
+  <div class="car_owner_top" ><h1>车主您好！</h1></div>
+  <%@car_nums.each do |car_num|%>
+    <div class="schedule_top">
+      <p>您的爱车<span><%= car_num.num %></span>正在：</p>
+    </div>
+    <div class="schedule_body_pp">
+      <ul>
+        <%@work_orders[car_num.id].each do |order|%>
+          <% if @products[order.order_id] %>
+            <li>
+              <div class="sche_left">
+                <div class="schedule_pro">1</div><span>项目</span>
+              </div>
+              <div class="sche_middle"><%= @products[order.order_id].name %></div>
+              <div class="sche_right">
+                <p>标准施工时间<span><%=@products[order.order_id].cost_time  %></span>分钟</p>
+                <p>剩余时间<span><%= order.status == WorkOrder::STAT[:WAIT] ? @products[order.order_id].cost_time : order.cost_time  %></span>分钟</p></div>
+            </li>
+          <%end%>
+        <%end if @work_orders[car_num.id]%>
+      </ul>
+    </div>
+  <%end unless @car_nums.blank?%>
+</div>

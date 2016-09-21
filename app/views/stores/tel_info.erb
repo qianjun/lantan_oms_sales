@@ -1,0 +1,14 @@
+<div class="tel_information">
+  <%@staffs.each do |staff|%>
+    <div class="info_01">
+      <div class="person">
+        <img  src="<%= staff.photo %>" class="person_img" />
+      </div>
+      <div class="person_information">
+        <h1> <%= staff.name %>/</h1><h2 ><%= @departs[staff.position].nil? ? "销售顾问" : @departs[staff.position] %></h2>
+        <p>手机：&nbsp;&nbsp;<%= staff.phone %></p>
+      </div>
+      <div class="telphone"><a href="tel:<%= staff.phone %>"  target="_blank"><img src="/assets/tel.png" /></a></div>
+    </div>
+  <%end%>
+</div>

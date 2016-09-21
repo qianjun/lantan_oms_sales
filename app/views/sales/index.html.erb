@@ -1,0 +1,35 @@
+<div class="head">
+  <h1 style="background: #e1303c;">开业活动</h1>
+</div>
+<div class="main">
+  <div class="sales_box">
+    <h1>久久久（三墩店）开业大酬宾</h1>
+    <img src="/sale_img/1.jpg" width="80%" />
+    <img src="/sale_img/2.jpg" width="80%" />
+    <img src="/sale_img/3.jpg" width="80%" />
+    <img src="/sale_img/4.jpg" width="80%" />
+    <img src="/sale_img/5.jpg" width="80%" />
+    <p><label>活动时间：</label><span style="width: 50%;">7月19日到8月19日</span>
+      <% if @cpr.nil? %>
+        <a href="/sales/baoming?open_id=<%= params[:open_id] %>"
+           style="float: right; margin-right: 5px;padding: 2px 5px;color: #fff;border: 0;background: green;">
+          参加活动
+        </a>
+      <%else%>
+        <a href="javascript:void(0)"  onclick="alert('您已经参加该活动，请关注下次！')"
+           style="float: right; margin-right: 5px;padding: 2px 5px;color: #fff;border: 0;background: green;">
+          参加活动
+        </a>
+      <%end%>
+    </p>
+    <p><label>活动介绍：</label><span>为庆贺三墩店开业，凡关注微信号参与该活动的均可获免费洗车一次。</span></p>
+    <p><label>活动规则：</label><span>每位客户仅限享受一次</span></p>
+
+  </div>
+</div>
+<% if flash[:err] %>
+  <script>
+    alert("<%= flash[:err] %>");
+  </script>
+<% end %>
+

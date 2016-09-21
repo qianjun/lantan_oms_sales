@@ -1,0 +1,128 @@
+<script type="text/javascript">
+  var _isWebKit = '__proto__' in {};
+  function loadJs(src, prefix){
+    var jsrc = null;
+    if((typeof src) == 'string'){
+      jsrc = prefix ? prefix+'/'+src : src;
+      document.write('<script type="text/javascript" src="'+jsrc+'"><\/script>');
+    }else{
+      for(i=0; i<src.length; i++){
+        jsrc = prefix ? prefix+'/'+src[i] : src[i];
+        document.write('<script type="text/javascript" src="'+jsrc+'"><\/script>');
+      }
+    }
+  }
+  if(_isWebKit){
+    loadJs(["zepto.js", "gmu.js", "event.js", "parseTpl.js", "widget.js", "matchMedia.js", "event.ortchange.js",
+      "slider.js", "dots.js", "$touch.js", "throttle.js", "event.scrollStop.js", "$autoplay.js", "imglazyload.js"], '/assets/ui');
+  }else{
+    loadJs(["jquery.js", "jquery.lazy.js"], "/assets/ui");
+  }
+</script>
+<div class="mbg_body" >
+  <div class="wrap" style="overflow:hidden">
+    <div class="minmain" >
+      <div class="bnone320 ui-slider" id="slider">
+        <div class="ui-slider-group" style="width: <%= Constant::SALE_PICSIZE[2]*@sales.length %>px;">
+          <% @sales.each do |sale| %>
+            <div class="ui-slider-item">
+              <a href="<%= Constant::SERVER_PATH %>/sales/<%= sale.id %>"><img src="<%= sale.img_url.nil? ? "" : sale.img_url.gsub("img#{sale.id}","img#{sale.id}_#{Constant::SALE_PICSIZE[2]}") %>" /></a>
+            </div>
+          <%end%>
+        </div>
+      </div>
+
+      <script type="text/javascript">
+        $(function(){
+          $('#slider').slider({loop:true});
+          var doc_width = $(window).width();
+          var slider = $('p.ui-slider-dots');
+          var slider_width = slider.width();
+          var slider_right = parseInt((doc_width-slider_width)/2-6);
+          slider.css({right: slider_right});
+          $(window).resize(function(){
+            doc_width = $(window).width();
+            slider_right = parseInt((doc_width-slider_width)/2-6);
+            slider.css({right: slider_right});
+          });
+        });
+      </script>
+
+      <div class="serve">
+        <div class="serve_01"><a  href="/stores/<%=  @store.id%>/items/1?openid=<%= params[:openid] %>"><img  src="/assets/prduce.png"  /></a></div>
+        <div class="serve_01"><a  href="/stores/<%=@store.id%>/items/2?openid=<%= params[:openid] %>"><img  src="/assets/serve.png"  /></a></div>
+        <div class="serve_01"><a  href="/stores/<%=@store.id%>/items/3?openid=<%= params[:openid] %>"><img src="/assets/card.png" /></a></div>
+      </div>
+      <% if @store.recommand_prods %>
+        <div class="new_product_prom">
+          <p>新品推荐&nbsp;&nbsp;&nbsp;<span style="color:red;">HOT</span>
+            <% if @products.length > 3 %>
+              <span class="click_more" >
+                <a href="/stores/<%=  @store.id%>/items/4?openid=<%= params[:openid] %>">点击查看更多新品</a></span>
+            <%end%>
+          </p>
+          <% @products[0..2].each do |product| %>
+            <div class="new_product_present">
+              <a><img alt="<%= product.name %>" src="<%= product.img_url && product.img_url.gsub("img#{product.id}","img#{product.id}_#{Constant::P_PICSIZE[1]}") %>" /></a>
+              <div class="new_product_content"><span ><a href="/stores/<%= @store.id %>/items/<%= product.id %>/prod_detail?types=<%= product.types %>&openid=<%= params[:openid] %>" ><%= product.name %></a></span>
+              </div>
+              <p><%= product.description.nil? ?  "" : truncate_u(product.description,28) %></p>
+            </div>
+          <%end%>
+        </div>
+      <%end%>
+      <div class="prom_product">
+        <div class="bont">
+          <div class="lef"><a href="#" >新品上市</a></div>
+          <div class="lef"><a href="#" ><span>新品上市</span></a></div></div>
+        <div class="bont ">
+          <div class="lef"><a href="#" >新品上市</a></div>
+          <div class="lef"><a href="#" ><span>新品上市</span></a></div></div>
+        <div class="bont ">
+          <div class="lef"><a href="#" >新品上市</a></div>
+          <div class="lef"><a href="#"  ><span>新品上市</span></a></div></div>
+      </div>
+      <div class="map_adress">
+        <div class="map">
+          <a href="/stores/<%= @store.id %>/store_map" target="_blank">
+            <img src="http://api.map.baidu.com/staticimage?center=<%=@store.position%>&width=400&height=300&zoom=16&markerStyles=l&markers=<%=@store.position%>&labels=<%=@store.position%>&labelStyles=<%=@store.name%>,1,14,1f1f1e,b0f961,1"/>
+          </a>
+          <div class="map_foot"><%= @store.name %> </div>
+          <div  class="call_person_tel">
+            <ul>
+              <%@staffs[0..1].each do |staff|%>
+                <li >
+                  <a href="tel:<%= staff.phone %>"  target="_blank">
+                    <img src="/assets/call_01.png" alt="<%= staff.name %>" />
+                  </a>
+                  <span><%= staff.name %></span>
+                </li>
+              <%end%>
+            </ul>
+          </div>
+          <div class="call_person">
+            <a href="/stores/<%= @store.id %>/tel_info"><img  src="/assets/call_we.png" /></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  //预加载销售人员头像
+  var Img = null;
+  function pre_load(isrc){
+    if((typeof isrc) == 'string'){
+      Img = new Image;
+      Img.src =  isrc;
+    }else{
+      for(var i=0; i<isrc.length; i++){
+        Img = new Image;
+        Img.src = isrc[i];
+      }
+    }
+    return Img;
+  }
+  pre_load(<%= @staffs.map(&:photo).compact %>);
+</script>
